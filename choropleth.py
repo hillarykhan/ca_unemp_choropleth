@@ -21,7 +21,7 @@ try:
 except Exception as e:
     print(e)
 
-ca_counties = json.load(open('/Users/hillarykhan/Desktop/apca_choro/data/ca-county-boundaries.geojson', 'r'))
+ca_counties = json.load(open('/Users/hillarykhan/Desktop/ca_choropleth/data/ca-county-boundaries.geojson', 'r'))
 
 for feature in ca_counties['features']:
     feature['id'] = feature['properties']['geoid']
