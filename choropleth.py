@@ -8,14 +8,12 @@ import requests
 
 
 from app import app
-from app import server
-
+# DATA WRANGLING STARTS
 
 try:
-    # print("BEFORE")
+
     unemp_request = requests.get('https://ca-county-unemp.herokuapp.com/unemployment', timeout=3).json()
-    # print("AFTER")
-    # print(unemp_request)
+    
     df = pd.DataFrame(unemp_request)
 
 except Exception as e:
@@ -29,7 +27,7 @@ for feature in ca_counties['features']:
 geo_df = gpd.GeoDataFrame.from_features(
     ca_counties["features"])
 
-# print("geo_df: ", geo_df.head())
+
 # DATA WRANGLING ENDS
 
 # APP LAYOUT STARTS
@@ -81,14 +79,13 @@ app.layout = html.Div([
 )
 
 def update_graph(option_slctd):
-    # print(option_slctd)
-    # print(type(option_slctd))
+
 
     dff = df.copy()
-    # print("dff: ", dff.head())
+    
     dff = dff[dff['year'] == option_slctd]
 
-    # print("dff with year chosen", dff.head())
+
 
     fig = px.choropleth(
         dff,
